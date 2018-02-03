@@ -48,8 +48,9 @@ function drawBricks() {
 }
 function collisionDetection(){
     for (c=0; c<brickColumnCount; c++){
-      for (r=0; r<brickColumnCount; r++){
-            var b = bricks[c][r];
+        var b = bricks[c][0];
+        for (r=0; r<brickColumnCount; r++){
+            b = bricks[c][r];
             if (b.status == 1 ){
               if (x>b.x && x<b.x+brickWidth && y>b.y && y<b.y+brickHeight)
                {
