@@ -21,8 +21,9 @@ var brickOffsetLeft= 30;
 var bricks =[]; //массив с позицией кирпичей
 
 //цветовой массив
-var arrColors = [ "red", "brown", "green", "orange", "aqua", "violet" ];
-
+var arrColors = [ "red", "purple", "green", "yellow", "aqua", "violet","blue", "green" ];
+var color;
+var color_paddle=Math.round(Math.random()*7);
 //Платформа
 var paddleHeight = 10;
 var paddleWidth = 75;
@@ -32,6 +33,8 @@ var paddleX= (canvas.width-paddleWidth)/2;
 var rightPresed=false;
 var leftPressed=false;
 
+var score = 0;
+
 
 
 
@@ -39,8 +42,28 @@ var leftPressed=false;
 
 //_____________________________________________________________________________________________________________________
 
+
+
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("mousemove", mouseMoveHandler, false);
+
+
+
+function drawScore () {
+    ctx.font ="16px Arial";
+    ctx.fillStyle ="#9c63dd";
+    ctx.fillText("Score: "+score, 8, 20);
+}
+
+function mouseMoveHandler(e) {
+    var relativeX=e.clientX - canvas.offsetLeft;
+    if (relativeX > 0 && relativeX < canvas.width) {
+        paddleX = relativeX - paddleWidth / 2;
+    }
+}
+
+
 
 function keyDownHandler(e) {
     if(e.keyCode==39) {
@@ -73,7 +96,7 @@ for(c=0; c<brickColumnCount; c++){
 function drawPaddle() {
     ctx.beginPath();
     ctx.rect(paddleX, 310, paddleWidth, paddleHeight);
-    ctx.fillStyle = "white";
+    ctx.fillStyle = arrColors[color_paddle];
     ctx.fill();
     ctx.closePath();
 }
@@ -82,27 +105,38 @@ function drawBricks() {
     for (c=0; c<brickColumnCount; c++){
         for (r=0; r<brickRowCount; r++){
             if (bricks[c][r].status == 1) {
+                color=Math.round(Math.random()*7);
                 ctx.beginPath();
                 ctx.rect(bricks[c][r].x, bricks[c][r].y, brickWidth, brickHeight);
-                ctx.fillStyle = "brown";
+                ctx.fillStyle = arrColors[color];
                 ctx.fill();
                 ctx.closePath();
             }
         }
     }
 }
+
+
+
 function collisionDetection(){
     for (c=0; c<brickColumnCount; c++){
         for (r=0; r<brickRowCount; r++){
             b = bricks[c][r];
+
             if (b.status == 1 ){
               if (x>b.x && x<b.x+brickWidth && y>b.y && y<b.y+brickHeight)
                {
                    dy=-dy;
                    b.status = 0;
+                   ++score;
                }
+                if(score == brickRowCount*brickColumnCount)
+                {
+                    alert("you win");
+                    document.location.reload();
+                }
             }
-      }
+        }
     }
 }
 
@@ -111,10 +145,20 @@ function collisionDetection(){
 function draw() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    drawScore();
     drawBricks();
     drawPaddle();
     ctx.beginPath();
+    if(y+dy<ballRadius){
+        dy=-dy;
+
+    }
+    else if(y+dy>canvas.height-ballRadius*2){
+        if (x>paddleX && x < paddleX + paddleWidth){
+            dy=-dy;
+            color_paddle = Math.round(Math.random()*7);
+        }
+    }
 
     if (paddleX>=0 && paddleX<=canvas.width-paddleWidth) {
         if(rightPresed) {
@@ -124,8 +168,11 @@ function draw() {
             paddleX -= 5;
         }
     }
-    else {
-        paddleX-=1;
+    if (paddleX > canvas.width-paddleWidth) {
+        paddleX-=2;
+    }
+    if (paddleX < 1){
+        paddleX+=2;
     }
 
 
@@ -134,9 +181,16 @@ function draw() {
     if(x + dx > canvas.width-ballRadius || x + dx < ballRadius) {
         dx = -dx;
     }
-    if(y + dy > canvas.height-ballRadius || y + dy < ballRadius) {
+    if(y + dy > canvas.height-ballRadius){ //пол
+        alert("game over");
         dy = -dy;
+        document.location.reload();
     }
+    if( y + dy < ballRadius){ //поолок
+        dy =- dy;
+
+    }
+
     ctx.arc(x, y, ballRadius, 0, Math.PI*2);
     ctx.fillStyle = "black";
     ctx.fill();
