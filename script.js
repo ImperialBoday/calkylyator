@@ -23,6 +23,43 @@ var bricks =[]; //массив с позицией кирпичей
 //цветовой массив
 var arrColors = [ "red", "brown", "green", "orange", "aqua", "violet" ];
 
+//Платформа
+var paddleHeight = 10;
+var paddleWidth = 75;
+var paddleX= (canvas.width-paddleWidth)/2;
+
+//Считываем движение платформы
+var rightPresed=false;
+var leftPressed=false;
+
+
+
+
+
+
+//_____________________________________________________________________________________________________________________
+
+document.addEventListener("keydown", keyDownHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
+
+function keyDownHandler(e) {
+    if(e.keyCode==39) {
+        rightPresed = true;
+    }
+    else if (e.keyCode ==37) {
+        leftPressed = true;
+    }
+}
+
+function keyUpHandler(e) {
+    if(e.keyCode == 39){
+        rightPresed =false;
+    }
+    else if(e.keyCode == 37) {
+        leftPressed = false;
+    }
+}
+
 
 for(c=0; c<brickColumnCount; c++){
     bricks[c]=[];
@@ -31,6 +68,14 @@ for(c=0; c<brickColumnCount; c++){
         bricks [c][r].x=(c*(brickWidth+brickPadding))+brickOffsetLeft;
         bricks [c][r].y=(r*(brickHeight+brickPadding))+brickOffsetTop;
     }
+}
+
+function drawPaddle() {
+    ctx.beginPath();
+    ctx.rect(paddleX, 310, paddleWidth, paddleHeight);
+    ctx.fillStyle = "white";
+    ctx.fill();
+    ctx.closePath();
 }
 
 function drawBricks() {
@@ -61,12 +106,28 @@ function collisionDetection(){
     }
 }
 
+
+
 function draw() {
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     drawBricks();
+    drawPaddle();
     ctx.beginPath();
+
+    if (paddleX>=0 && paddleX<=canvas.width-paddleWidth) {
+        if(rightPresed) {
+            paddleX += 5;
+        }
+        if(leftPressed) {
+            paddleX -= 5;
+        }
+    }
+    else {
+        paddleX-=1;
+    }
+
 
     x += dx;
     y += dy;
