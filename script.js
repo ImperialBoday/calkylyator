@@ -214,4 +214,4 @@ function draw() {
     collisionDetection();
     ctx.closePath();
 }
-setInterval(draw, 6);
+setInterval(draw, 12);
