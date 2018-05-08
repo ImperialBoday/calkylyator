@@ -1,19 +1,80 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="utf-8" />
-    <title>Arkanoid</title>
-    <style>
-    	* { padding: 0; margin: 0; }
-    	canvas { background: lightblue; display: block; margin: 0 auto; }
-    </style>
-    <canvas id="myCanvas" width="515" height="320"></canvas>
-	<script src="script.js"></script>
-</head>
-<body>
-
-
-
-
-</body>
+<head lang="ru">
+    <meta charset="UTF-8">
+    <title></title>
+	<link href="style.css" rel="stylesheet">
+ <body>
+	<div id="wrap">
+	  <form id="bike">
+		  <H1>ПОКРАСКА ВЕЛОСИПЕДА</H1>
+		  <label>Размер Рамы</label>
+		  <br/>
+		  <input type="radio" name="selectframe" value="200" id = "Round16" /><label for="Round16">15-16" (200грн)</label>
+		  <br/>
+		  <input type="radio" name="selectframe" value="250" id = "Round18"/><label for="Round18">17-18" (250грн)</label>
+		  <br/>
+		  <input type="radio" name="selectframe" value="300" id = "Round20"/> <label for="Round20">19-20" (300грн)</label>
+		  <br/>
+		  <input type="radio" name="selectframe" value="350" id = "Round22"/> <label for="Round22">21-22" (350грн)</label>
+		  <br/>
+		  <br/>
+		  <label>Тип краски</label>
+		  <br/>
+		  <input type="radio" name="selectcolortype" value="200" id = "colortype1" /><label for="colortype1">Глянцевая (200грн)</label>
+		  <br/>
+		  <input type="radio" name="selectcolortype" value="250" id = "colortype2"/><label for="colortype2">Матовая (250грн)</label>
+		  <br/>
+		  <input type="radio" name="selectcolortype" value="300" id = "colortype3"/> <label for="colortype3">Металик (300грн)</label>
+		  <br/>
+		  <input type="radio" name="selectcolortype" value="350" id = "colortype4"/> <label for="colortype4" >Винил (350грн)</label>
+		  <br/>
+		  <br/>
+		  
+		  <label>Первый цвет</label>
+			<select id="filling" name='filling'>
+			<option id="selectcolor" value="0">Выберите Цвет</option>
+			<option id="green" value="80">Зеленый (80грн)</option>
+			<option id="lime" value="100">Лаймовый (100грн)</option>
+			<option id="blue" value="80">Синий (80грн)</option>
+			<option id="lightblue" value="100">Голубой (100грн)</option>
+			<option id="black" value="40">Чёрный (40грн)</option>
+			<option id="white" value="40">Белый (40грн)</option>
+			<option id="gold" value="160">Золотой(160грн)</option>
+			<option id="red" value="80">Красный(80грн)</option>
+			<option id="cherry" value="100">Вишневый(100грн)</option>
+			<option id="pink" value="80">Розовый (80грн)</option>
+		  </select>
+		  <br/>
+		  
+		  <br/>
+		 
+		  <label>Второй цвет (по жеданию)</label>
+		  <select id="filling" name='filling'>
+			<option id="selectcolor" value="0">Выберите Цвет</option>
+			<option id="green" value="80">Зеленый (80грн)</option>
+			<option id="lime" value="100">Лаймовый (100грн)</option>
+			<option id="blue" value="80">Синий (80грн)</option>
+			<option id="lightblue" value="100">Голубой (100грн)</option>
+			<option id="black" value="40">Чёрный (40грн)</option>
+			<option id="white" value="40">Белый (40грн)</option>
+			<option id="gold" value="160">Золотой(160грн)</option>
+			<option id="red" value="80">Красный(80грн)</option>
+			<option id="cherry" value="100">Вишневый(100грн)</option>
+			<option id="pink" value="80">Розовый (80грн)</option>
+		  </select>
+		  <br/>
+		  
+		  <p>
+		 <br/> <input type="radio" id="razborka" name='razborka' value = "50"/>
+			<label for='razborka' class="inlinelabel"> Разборка (50грн)</label>			
+		  <br/><input type="radio" id="zborka" name='zborka' value = "50"/>
+			<label for='zborka' class="zborka"> Сборка (50грн)</label>			
+		  </p>
+		  <div id="result"  class="result" style="display: bloc"></div>
+	  </form>
+	</div>
+	<script src = "script.js"></script>
+	
+ </body>
 </html>

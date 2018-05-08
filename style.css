@@ -1,0 +1,63 @@
+
+body{
+background-image:url('fon.jpg');
+}
+label{
+color: black;
+background: pink;
+}
+H1{
+color: black;
+background: pink;
+width: 430px;
+}
+input[type="text"] {
+ background-color: lightblue;
+}
+#result{
+color: black;
+background: pink;
+width: 32px;
+}
+#wrap{
+margin-left: 25%;
+}
+#filling {
+background: pink;
+}
+#selectcolor{
+background: pink;
+}
+#green{
+ background-color: green;
+}
+#lime{
+ background-color: lime;
+}
+#blue{
+ background-color: blue;
+ color: white;
+}
+#lightblue{
+ background-color: lightblue;
+}
+#black{
+ background-color: black;
+ color: white;
+}
+#white{
+ background-color: white;
+}
+#gold{
+ background-color: #ffd700;
+}
+#red{
+ background-color: red;
+}
+#cherry{
+ background-color: #CD2682;
+}
+#pink{
+ background-color: pink;
+}
+
